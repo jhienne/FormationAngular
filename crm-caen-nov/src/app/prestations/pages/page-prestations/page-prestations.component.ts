@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PrestationsService } from '../../services/prestations.service';
 import { Prestation } from 'src/app/shared/models/prestation';
 import { State } from 'src/app/shared/enums/state.enum';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page-prestations',
@@ -13,10 +14,15 @@ export class PagePrestationsComponent implements OnInit {
   public headers: string[];
   public states = State;
   //public states = Object.values(State);
+  public title: string;
+  public label: string;
+  public routeBtn: string;
+  public labelBtn: string;
 
   constructor(
-    private prestationService: PrestationsService
-    ) { }
+    private prestationService: PrestationsService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.collection = this.prestationService.collection;
@@ -29,6 +35,15 @@ export class PagePrestationsComponent implements OnInit {
       'Total TTC',
       'State'
     ];
+    this.labelBtn = 'Ajouter une prestation';
+    this.routeBtn = 'add';
+    //console.log( this.route);
+    this.route.data.subscribe((donnees) => {
+      this.title = donnees.title;
+      this.label = donnees.label;
+    }
+    )
+
   }
 
   public update(item: any, event: any) {

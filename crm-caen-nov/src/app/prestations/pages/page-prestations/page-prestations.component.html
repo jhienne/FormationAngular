@@ -17,8 +17,9 @@
           >
         </select>
       </td>
+      <td><app-action (action)="doAction($event, item)"></app-action></td>
     </tr>
   </app-tableau-light>
 
-<app-button-a [label]="labelBtn" [route]="routeBtn"></app-button-a>
+  <app-button-a [label]="labelBtn" [route]="routeBtn"></app-button-a>
 </app-template-a>

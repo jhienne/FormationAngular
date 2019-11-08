@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PrestationsService } from '../../services/prestations.service';
 import { Prestation } from 'src/app/shared/models/prestation';
 import { State } from 'src/app/shared/enums/state.enum';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 
 @Component({
@@ -25,7 +25,8 @@ export class PagePrestationsComponent implements OnInit, OnDestroy {
 
   constructor(
     private prestationService: PrestationsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -40,7 +41,8 @@ export class PagePrestationsComponent implements OnInit, OnDestroy {
       'TjmHT',
       'Total HT',
       'Total TTC',
-      'State'
+      'State',
+      'Action'
     ];
     this.labelBtn = 'Ajouter une prestation';
     this.routeBtn = 'add';
@@ -64,6 +66,17 @@ export class PagePrestationsComponent implements OnInit, OnDestroy {
     // }));
   }
 
+
+  public doAction(action: string, item: Prestation) {
+    if (action === 'delete') {
+      this.prestationService.delete(item);
+    }
+
+    if (action === 'edit') {
+      this.router.navigate(['prestations/edit', item.id]);
+    }
+
+  }
   ngOnDestroy() {
     // this.sub.unsubscribe();
   }

@@ -55,7 +55,13 @@ export class PagePrestationsComponent implements OnInit, OnDestroy {
 
   public update(item: any, event: any) {
     //console.log(item, event.target.value);
-    this.prestationService.update(item, event.target.value);
+    this.prestationService.update(item, event.target.value.then((res) => {
+      //traiter reponse API
+      item.state = event.target.value;
+    }));
+    // this.prestationService.update(item, event.target.value.subscribe((res) => {
+    //   item.state = event.target.value;
+    // }));
   }
 
   ngOnDestroy() {

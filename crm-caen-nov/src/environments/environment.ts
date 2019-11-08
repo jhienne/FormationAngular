@@ -12,7 +12,8 @@ export const environment = {
     storageBucket: "crm-paris-sept-2019.appspot.com",
     messagingSenderId: "749933415630",
     appId: "1:749933415630:web:4c3663e1d1fe6835ac549f"
-  }
+  },
+  urlApi:'devapiurl/'
 };
 
 /*
